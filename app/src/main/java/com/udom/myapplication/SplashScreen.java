@@ -10,7 +10,7 @@ import android.os.Handler;
 public class SplashScreen extends Activity {
 
 
-    private static final int SPLASH_SCREEN_TIMEOUT = 2000; // 2 seconds
+    private static final int SPLASH_SCREEN_TIMEOUT = 3000; // 3 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

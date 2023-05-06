@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
+import android.util.Log;
+
 
 public class SetImage extends AppCompatActivity {
 
@@ -38,7 +42,6 @@ public class SetImage extends AppCompatActivity {
         captureBtn = findViewById(R.id.captureBtn);
         predictBtn = findViewById(R.id.detectBtn);
         imageView = findViewById(R.id.imageview);
-        result = findViewById(R.id.result);
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +64,15 @@ public class SetImage extends AppCompatActivity {
         predictBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                try {
-//
-//                }catch (IOException e){
-//
-//                }
+                //when click predict
+                if (bitmap != null) {
+                    Intent intent = new Intent(SetImage.this, ViewResult.class);
+                    intent.putExtra("image", bitmap);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please capture/upload an image first", Toast.LENGTH_SHORT).show();
+                   // Log.d("TAG", "Please select");
+                }
             }
         });
     }
