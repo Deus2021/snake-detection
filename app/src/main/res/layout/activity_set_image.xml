@@ -23,6 +23,7 @@
         android:id="@+id/imageview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
         />
 
     <Button

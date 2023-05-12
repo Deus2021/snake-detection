@@ -3,6 +3,7 @@ package com.udom.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Outline;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class ViewResult extends AppCompatActivity {
         setContentView(R.layout.activity_view_result);
 
         imageView = findViewById(R.id.imageview);
-        result  = findViewById(R.id.result);
+        result  = findViewById(R.id.viewresult);
 
         imageView.setOutlineProvider(new ViewOutlineProvider() {
             @Override
@@ -36,6 +37,7 @@ public class ViewResult extends AppCompatActivity {
         if (getIntent().hasExtra("image")) {
             Bitmap bitmap = getIntent().getParcelableExtra("image");
             imageView.setImageBitmap(bitmap);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
     }
-}
+}  

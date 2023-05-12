@@ -29,7 +29,7 @@ public class SetImage extends AppCompatActivity {
     Button selectBtn, captureBtn, predictBtn;
     ImageView imageView;
     Bitmap bitmap;
-    TextView result;
+    String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class SetImage extends AppCompatActivity {
         captureBtn = findViewById(R.id.captureBtn);
         predictBtn = findViewById(R.id.detectBtn);
         imageView = findViewById(R.id.imageview);
-
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +104,7 @@ public class SetImage extends AppCompatActivity {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageView.setImageBitmap(bitmap);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -113,6 +113,7 @@ public class SetImage extends AppCompatActivity {
         else if(requestCode==12){
             bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
