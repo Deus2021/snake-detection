@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ import android.util.Log;
 
 public class SetImage extends AppCompatActivity {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_SELECT = 2;
     Button selectBtn, captureBtn, predictBtn;
     ImageView imageView;
     Bitmap bitmap;
@@ -44,19 +48,17 @@ public class SetImage extends AppCompatActivity {
         imageView = findViewById(R.id.imageview);
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 10);
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_IMAGE_SELECT);
             }
         });
 
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 12);
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
             }
         });
 
@@ -81,6 +83,9 @@ public class SetImage extends AppCompatActivity {
             if(checkSelfPermission(Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(SetImage.this, new String[]{Manifest.permission.CAMERA},11);
             }
+            if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(SetImage.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},12);
+            }
         }
     }
 
@@ -93,28 +98,32 @@ public class SetImage extends AppCompatActivity {
                 }
             }
         }
+        if (requestCode == 12) {
+            if (grantResults.length>0){
+                if (grantResults[0]!=PackageManager.PERMISSION_GRANTED){
+                    this.getPermission();
+                }
+            }
+        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==10){
-            if (data!= null) {
-                Uri uri = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+            Bundle extras = data.getExtras();
+            bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(bitmap);
+        }
+        else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                imageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        else if(requestCode==12){
-            bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(bitmap);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -89,7 +89,7 @@ well as. Before the coming of mobile operators in late of 1994 the company was m
                 android:text="Male Plant"
                 android:layout_below="@id/information"
                 android:background="@drawable/button_normal"
-                android:id="@+id/maleBtn"
+                android:id="@+id/maleBtninfo"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
                 />
@@ -97,9 +97,9 @@ well as. Before the coming of mobile operators in late of 1994 the company was m
                 android:layout_width="320dp"
                 android:layout_height="50dp"
                 android:text="Female Plant"
-                android:layout_below="@id/maleBtn"
+                android:layout_below="@id/maleBtninfo"
                 android:background="@drawable/button_normal"
-                android:id="@+id/femaleBtn"
+                android:id="@+id/femaleBtninfo"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
                 />
