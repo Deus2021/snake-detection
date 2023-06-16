@@ -1,0 +1,18 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize other theme attributes as needed -->
+    </style>
+
+    <!-- Custom style for the app name text in the toolbar -->
+<!--    <style name="AppBarTitle" parent="@android:style/TextAppearance.Widget.ActionBar.Title">-->
+<!--        <item name="android:textAlignment">center</item>-->
+<!--        &lt;!&ndash; Add other text appearance attributes as needed &ndash;&gt;-->
+<!--    </style>-->
+</resources>
+
+
+
+
+
+
+

@@ -32,4 +32,9 @@ public class SplashScreen extends Activity {
             }
         }, SPLASH_SCREEN_TIMEOUT);
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

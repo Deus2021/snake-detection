@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.View;
@@ -38,10 +39,16 @@ public class ViewResult extends AppCompatActivity {
             }
         });
 
-        if (getIntent().hasExtra("image")) {
-            Bitmap bitmap = getIntent().getParcelableExtra("image");
+//        if (getIntent().hasExtra("image")) {
+//            Bitmap bitmap = getIntent().getParcelableExtra("image");
+//            imageView.setImageBitmap(bitmap);
+//            //imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//        }
+        Intent intent = getIntent();
+        byte[] imageData = intent.getByteArrayExtra(SetImage.EXTRA_IMAGE_DATA);
+        if (imageData != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
             imageView.setImageBitmap(bitmap);
-            //imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
 
         maleinfo.setOnClickListener(new View.OnClickListener() {
