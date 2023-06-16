@@ -27,6 +27,7 @@ public class SetImage extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_SELECT = 2;
+    private static final int PERMISSION_REQUEST_CODE = 3;
 
     public static final String EXTRA_IMAGE_DATA = "image_data";
 
@@ -47,14 +48,22 @@ public class SetImage extends AppCompatActivity {
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestImageSelectionPermission();
+                if (checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    openImagePicker();
+                } else {
+                    requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+                }
             }
         });
 
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestCameraPermission();
+                if (checkPermission(Manifest.permission.CAMERA)) {
+                    openCamera();
+                } else {
+                    requestPermission(Manifest.permission.CAMERA);
+                }
             }
         });
 
@@ -71,59 +80,25 @@ public class SetImage extends AppCompatActivity {
                 }
             }
         });
-
-        // Restore the state if available
-        if (savedInstanceState != null) {
-            byte[] imageData = savedInstanceState.getByteArray("image_data");
-            if (imageData != null) {
-                bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
-                imageView.setImageBitmap(bitmap);
-            }
-        }
     }
 
-    private void requestCameraPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            captureImage();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
-        }
+    private boolean checkPermission(String permission) {
+        int result = ContextCompat.checkSelfPermission(this, permission);
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void requestImageSelectionPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            selectImage();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_IMAGE_SELECT);
-        }
+    private void requestPermission(String permission) {
+        ActivityCompat.requestPermissions(this, new String[]{permission}, PERMISSION_REQUEST_CODE);
     }
 
-    private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-    }
-
-    private void selectImage() {
+    private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_SELECT);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                captureImage();
-            } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
-            }
-        } else if (requestCode == REQUEST_IMAGE_SELECT) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                selectImage();
-            } else {
-                Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
+    private void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
     @Override
@@ -131,27 +106,17 @@ public class SetImage extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             Bundle extras = data.getExtras();
-            if (extras != null && extras.containsKey("data")) {
-                bitmap = (Bitmap) extras.get("data");
-                imageView.setImageBitmap(bitmap);
-            }
+            bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(bitmap);
         } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                imageView.setImageBitmap(bitmap);
+//                imageView.setImageBitmap(bitmap);
+                imageView.setImageURI(selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (bitmap != null) {
-            byte[] imageData = getByteArrayFromBitmap(bitmap);
-            outState.putByteArray("image_data", imageData);
         }
     }
 
@@ -160,7 +125,38 @@ public class SetImage extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, perform the corresponding action again
+                int permissionIndex = getPermissionIndex(permissions[0]);
+                switch (permissionIndex) {
+                    case 0:
+                        openCamera();
+                        break;
+                    case 1:
+                        openImagePicker();
+                        break;
+                }
+            } else {
+                Toast.makeText(this, "Permission denied. Unable to proceed.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private int getPermissionIndex(String permission) {
+        if (permission.equals(Manifest.permission.CAMERA)) {
+            return 0;
+        } else if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            return 1;
+        }
+        return -1;
+    }
 }
+
 
 
 

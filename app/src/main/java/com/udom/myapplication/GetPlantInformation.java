@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
-import android.widget.Button;
 
 public class GetPlantInformation extends AppCompatActivity {
     Button femaleBtn, maleBtn, generalBtn;
@@ -41,7 +40,7 @@ public class GetPlantInformation extends AppCompatActivity {
         generalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GetPlantInformation.this, GeneralPlentInfo.class);
+                Intent intent = new Intent(GetPlantInformation.this, GeneralPlantInfo.class);
                 startActivity(intent);
             }
         });
