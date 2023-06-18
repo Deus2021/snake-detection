@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ViewResult extends AppCompatActivity {
 
     ImageView imageView;
     Button maleinfo, femaleinfo;
+
+    LinearLayout layoutfemale, layoutmale;
     TextView resultview;
 
     @SuppressLint("MissingInflatedId")
@@ -30,6 +33,10 @@ public class ViewResult extends AppCompatActivity {
         resultview  = findViewById(R.id.viewresult);
         maleinfo = findViewById(R.id.maleBtninfo);
         femaleinfo = findViewById(R.id.femaleBtninfo);
+
+        layoutfemale = findViewById(R.id.layoutfemale);
+        layoutmale  = findViewById(R.id.layoutmale);
+
 
         imageView.setOutlineProvider(new ViewOutlineProvider() {
             @Override
@@ -48,6 +55,15 @@ public class ViewResult extends AppCompatActivity {
         String result = intent.getStringExtra("result");
 
         resultview.setText(result);
+        String view = resultview.getText().toString();
+
+        if (view == "not papaya") {
+            layoutmale.setVisibility(View.GONE);
+            layoutfemale.setVisibility(View.VISIBLE);
+        } else if (view == "male") {
+            layoutfemale.setVisibility(View.GONE);
+            layoutmale.setVisibility(View.VISIBLE);
+        }
 
 
         maleinfo.setOnClickListener(new View.OnClickListener() {

@@ -125,6 +125,8 @@ public class SetImage extends AppCompatActivity {
 
                         result.setText(labels[getMax(outputFeature0.getFloatArray())]+" ");
 
+                        result.setVisibility(View.GONE);
+
                         int maxIndex = getMax(outputFeature0.getFloatArray());
                         // String resultText = String.valueOf(maxIndex);
                         String resultText = result.getText().toString();

@@ -1,9 +1,9 @@
 package com.udom.myapplication;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +21,8 @@ public class MaleInfo extends AppCompatActivity {
     private TextView contentTextView;
     private ProgressBar progressBar;
 
-    private static final String URL = "https://beeaware.org.au/pollination/pollinator-reliant-crops/papaya/";
+    private static final String URL = "https://www.instagram.com/samihan_sawant/?h1=en";
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,12 @@ public class MaleInfo extends AppCompatActivity {
             try {
                 Document doc = Jsoup.connect(URL).get();
                 Element contentElement = doc.getElementById("content");
-                return contentElement.text();
+                if (contentElement != null) {
+                    return contentElement.text();
+                } else {
+                    Log.e("FemaleInfo", "Content element not found in HTML");
+                    return null;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
