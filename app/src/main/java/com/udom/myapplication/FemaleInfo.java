@@ -3,6 +3,7 @@ package com.udom.myapplication;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ public class FemaleInfo extends AppCompatActivity {
     private TextView contentTextView;
     private ProgressBar progressBar;
 
-    private static final String URL = "https://beeaware.org.au/pollination/pollinator-reliant-crops/papaya/";
+    private static final String URL = "https://www.instagram.com/samihan_sawant/?h1=en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class FemaleInfo extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(FemaleInfo.this, "Loading", "Fetching content...");
+            progressDialog = ProgressDialog.show(FemaleInfo.this, "Loading", "Please wait while we are downloading...");
             progressBar.setVisibility(ProgressBar.VISIBLE);
         }
 
@@ -49,7 +50,12 @@ public class FemaleInfo extends AppCompatActivity {
             try {
                 Document doc = Jsoup.connect(URL).get();
                 Element contentElement = doc.getElementById("content");
-                return contentElement.text();
+                if (contentElement != null) {
+                    return contentElement.text();
+                } else {
+                    Log.e("FemaleInfo", "Content element not found in HTML");
+                    return null;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;

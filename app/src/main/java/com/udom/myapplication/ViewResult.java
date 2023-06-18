@@ -18,7 +18,7 @@ public class ViewResult extends AppCompatActivity {
 
     ImageView imageView;
     Button maleinfo, femaleinfo;
-    TextView result;
+    TextView resultview;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,7 +27,7 @@ public class ViewResult extends AppCompatActivity {
         setContentView(R.layout.activity_view_result);
 
         imageView = findViewById(R.id.imageview);
-        result  = findViewById(R.id.viewresult);
+        resultview  = findViewById(R.id.viewresult);
         maleinfo = findViewById(R.id.maleBtninfo);
         femaleinfo = findViewById(R.id.femaleBtninfo);
 
@@ -39,17 +39,16 @@ public class ViewResult extends AppCompatActivity {
             }
         });
 
-//        if (getIntent().hasExtra("image")) {
-//            Bitmap bitmap = getIntent().getParcelableExtra("image");
-//            imageView.setImageBitmap(bitmap);
-//            //imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//        }
         Intent intent = getIntent();
         byte[] imageData = intent.getByteArrayExtra(SetImage.EXTRA_IMAGE_DATA);
         if (imageData != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
             imageView.setImageBitmap(bitmap);
         }
+        String result = intent.getStringExtra("result");
+
+        resultview.setText(result);
+
 
         maleinfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,5 +65,11 @@ public class ViewResult extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }  
