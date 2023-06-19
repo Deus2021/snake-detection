@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,27 +21,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import com.udom.myapplication.ml.ModelUnquant;
 
 import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
+import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.nio.ByteOrder;
 
 public class SetImage extends AppCompatActivity {
 
@@ -49,11 +51,14 @@ public class SetImage extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE_CAMERA = 4;
     private static final int MAX_IMAGE_SIZE = 1024; // Maximum allowed image size in kilobytes
 
+    //private  static  final  int imageSize = 224;
     public static final String EXTRA_IMAGE_DATA = "image_data";
 
     private Button selectBtn, captureBtn, predictBtn;
     private TextView result;
     private ImageView imageView;
+
+    private Toolbar toolbar;
     private Bitmap bitmap;
 
 
@@ -62,25 +67,18 @@ public class SetImage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_image);
 
-        String[] labels=new String[4];
-        int count=0;
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open("labels.txt")));
-            String line=bufferedReader.readLine();
-            while (line!=null){
-                labels[count]=line;
-                count++;
-                line=bufferedReader.readLine();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.menu_toolbar);
+        setSupportActionBar(toolbar);
 
         selectBtn = findViewById(R.id.selectBtn);
         captureBtn = findViewById(R.id.captureBtn);
         predictBtn = findViewById(R.id.detectBtn);
         imageView = findViewById(R.id.imageview);
         result = findViewById(R.id.resulttext);
+
+        ImageProcessor imageProcessor = new  ImageProcessor.Builder()
+                .add(new ResizeOp(224, 244, ResizeOp.ResizeMethod.BILINEAR)).build();
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,32 +101,50 @@ public class SetImage extends AppCompatActivity {
         predictBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bitmap = Bitmap.createScaledBitmap(bitmap,224,224,false);
 
                 if (bitmap != null) {
                     try {
-                        ModelUnquant model = ModelUnquant.newInstance(SetImage.this);
+                        ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());
 
-                        // Creates inputs for reference.
+
                         TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3);
+                        byteBuffer.order(ByteOrder.nativeOrder());
 
-                        // bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224,true);
-                        Bitmap input=Bitmap.createScaledBitmap(bitmap,224,224,true);
-                        TensorImage image=new TensorImage(DataType.FLOAT32);
-                        image.load(input);
-                        ByteBuffer byteBuffer=image.getBuffer();
+                        int [] intValues = new int[224 * 224];
+                        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+                        int pixel = 0;
+                        for (int i = 0; i < 224; i++) {
+                            for (int j = 0; j < 224; j++) {
+                                int val = intValues[pixel++];
+                                byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255.f));
+                                byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255.f));
+                                byteBuffer.putFloat((val & 0xFF) * (1.f / 255.f));
+                            }
+                        }
+
                         inputFeature0.loadBuffer(byteBuffer);
-                        //inputFeature0.loadBuffer(TensorImage.fromBitmap(bitmap).getBuffer());
 
                         // Runs model inference and gets result.
                         ModelUnquant.Outputs outputs = model.process(inputFeature0);
                         TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
-                        result.setText(labels[getMax(outputFeature0.getFloatArray())]+" ");
+                        float[] confidences = outputFeature0.getFloatArray();
+                        int maxPos = 0;
+                        float maxConfidence = 0;
+                        for (int i = 0; i < confidences.length; i++) {
+                            if (confidences[i] > maxConfidence) {
+                                maxConfidence = confidences[i];
+                                maxPos = i;
+                            }
+                        }
+                        String[] classes = {"male", "female", "not-papaya"};
 
+                        result.setText(classes[maxPos]);
                         result.setVisibility(View.GONE);
 
-                        int maxIndex = getMax(outputFeature0.getFloatArray());
-                        // String resultText = String.valueOf(maxIndex);
+
                         String resultText = result.getText().toString();
 
                         Intent intent = new Intent(SetImage.this, ViewResult.class);
@@ -147,14 +163,28 @@ public class SetImage extends AppCompatActivity {
                 }
             }
         });
+
     }
 
-    int getMax(float[] arr){
-        int max = 0;
-        for (int i = 0; i<arr.length; i++){
-            if(arr[i] > arr[max]) max=i;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.help:
+                Intent intent = new Intent(SetImage.this, UserManual.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return max;
     }
 
     private void requestCameraPermission() {
@@ -237,35 +267,20 @@ public class SetImage extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             Bundle extras = data.getExtras();
             bitmap = (Bitmap) extras.get("data");
-            bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
+           // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
             imageView.setImageBitmap(bitmap);
 
         } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
+               // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
                 imageView.setImageBitmap(bitmap);
                 getImageSize(selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    private Bitmap resizeBitmap(Bitmap bitmap, int maxSize) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int maxDimension = Math.max(width, height);
-
-        if (maxDimension > maxSize) {
-            float scale = (float) maxSize / maxDimension;
-            int scaledWidth = Math.round(scale * width);
-            int scaledHeight = Math.round(scale * height);
-            return Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, true);
-        }
-
-        return bitmap;
     }
 
     private byte[] getByteArrayFromBitmap(Bitmap bitmap) {
@@ -284,7 +299,7 @@ public class SetImage extends AppCompatActivity {
                     predictBtn.setEnabled(true);
                 } else {
                     predictBtn.setEnabled(false);
-                    Toast.makeText(this, "Image size exceeds the limit of 1024 KB, select another image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Image size exceeds the limit of 1024 KB, select another image", Toast.LENGTH_LONG).show();
                 }
                 return size;
             }

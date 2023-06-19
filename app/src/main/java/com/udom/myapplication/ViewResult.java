@@ -57,12 +57,15 @@ public class ViewResult extends AppCompatActivity {
         resultview.setText(result);
         String view = resultview.getText().toString();
 
-        if (view == "not papaya") {
+        if (view == "female") {
             layoutmale.setVisibility(View.GONE);
             layoutfemale.setVisibility(View.VISIBLE);
         } else if (view == "male") {
             layoutfemale.setVisibility(View.GONE);
             layoutmale.setVisibility(View.VISIBLE);
+        } else if (view == "not-papaya") {
+            layoutfemale.setVisibility(View.GONE);
+            layoutmale.setVisibility(View.GONE);
         }
 
 

@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".SetImage">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/light_green"
+        android:elevation="4dp"
+        android:clickable="true"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -13,7 +22,7 @@
         android:id="@+id/title"
         android:textSize="30dp"
         android:textAlignment="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         />
 
     <ImageView
@@ -67,7 +76,5 @@
         android:id="@+id/resulttext"
         android:layout_below="@id/detectBtn"
         android:layout_centerHorizontal="true"/>
-
-
 
 </RelativeLayout>
