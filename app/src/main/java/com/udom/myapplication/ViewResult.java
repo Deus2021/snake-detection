@@ -14,13 +14,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewResult extends AppCompatActivity {
 
-    ImageView imageView;
+    ImageView imageView, camera;
     Button maleinfo, femaleinfo;
 
-    LinearLayout layoutfemale, layoutmale;
+    LinearLayout layoutfemale, layoutmale, resultlayout, layoutnotpapaya;
     TextView resultview;
 
     @SuppressLint("MissingInflatedId")
@@ -33,9 +34,15 @@ public class ViewResult extends AppCompatActivity {
         resultview  = findViewById(R.id.viewresult);
         maleinfo = findViewById(R.id.maleBtninfo);
         femaleinfo = findViewById(R.id.femaleBtninfo);
+        resultlayout = findViewById(R.id.layout1);
+        camera = findViewById(R.id.cameranotpapaya);
 
         layoutfemale = findViewById(R.id.layoutfemale);
         layoutmale  = findViewById(R.id.layoutmale);
+        layoutnotpapaya = findViewById(R.id.layoutnotpapaya);
+
+        maleinfo.setEnabled(false);
+        femaleinfo.setEnabled(false);
 
 
         imageView.setOutlineProvider(new ViewOutlineProvider() {
@@ -53,19 +60,21 @@ public class ViewResult extends AppCompatActivity {
             imageView.setImageBitmap(bitmap);
         }
         String result = intent.getStringExtra("result");
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
         resultview.setText(result);
-        String view = resultview.getText().toString();
 
-        if (view == "female") {
-            layoutmale.setVisibility(View.GONE);
+        resultlayout = findViewById(R.id.layout1);
+
+        if (result.equals("female")) {
+            resultview.setTextColor(getResources().getColor(R.color.light_green));
             layoutfemale.setVisibility(View.VISIBLE);
-        } else if (view == "male") {
-            layoutfemale.setVisibility(View.GONE);
+        } else if (result.equals("male")) {
+            resultview.setTextColor(getResources().getColor(R.color.light_green));
             layoutmale.setVisibility(View.VISIBLE);
-        } else if (view == "not-papaya") {
-            layoutfemale.setVisibility(View.GONE);
-            layoutmale.setVisibility(View.GONE);
+        } else if (result.equals("not-papaya")) {
+            resultview.setTextColor(getResources().getColor(R.color.red));
+            layoutnotpapaya.setVisibility(View.VISIBLE);
         }
 
 
@@ -81,6 +90,14 @@ public class ViewResult extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewResult.this, FemaleInfo.class);
+                startActivity(intent);
+            }
+        });
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewResult.this, SetImage.class);
                 startActivity(intent);
             }
         });

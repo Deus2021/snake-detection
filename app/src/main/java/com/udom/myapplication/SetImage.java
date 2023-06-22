@@ -29,9 +29,7 @@ import androidx.core.content.ContextCompat;
 import com.udom.myapplication.ml.ModelUnquant;
 
 import org.tensorflow.lite.DataType;
-import org.tensorflow.lite.support.common.ops.NormalizeOp;
 import org.tensorflow.lite.support.image.ImageProcessor;
-import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
@@ -101,9 +99,8 @@ public class SetImage extends AppCompatActivity {
         predictBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bitmap = Bitmap.createScaledBitmap(bitmap,224,224,false);
-
                 if (bitmap != null) {
+                    bitmap = Bitmap.createScaledBitmap(bitmap,224,224,false);
                     try {
                         ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());
 
@@ -178,6 +175,11 @@ public class SetImage extends AppCompatActivity {
 
         switch (id) {
             case R.id.help:
+//                Intent intent = new Intent(SetImage.this, UserManual.class);
+//                startActivity(intent);
+//                return true;
+
+            case R.id.manual:
                 Intent intent = new Intent(SetImage.this, UserManual.class);
                 startActivity(intent);
                 return true;

@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_image"
-    tools:context=".MainActivity">
-
-    <LinearLayout
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:padding="25dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/background_image"
+        tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="250dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:background="@drawable/button_selector"
-            android:layout_marginBottom="16dp"
-            android:padding="12dp"
-            android:radius="24dp"
-            />
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:padding="25dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Get Info"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:background="@drawable/button_selector"
-            android:padding="12dp"
-            android:radius="40dp"
-            android:layout_marginBottom="60dp"/>
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:background="@drawable/button_selector"
+                android:layout_marginBottom="16dp"
+                android:padding="12dp"
+                android:radius="24dp"
+                />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Get Info"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:background="@drawable/button_selector"
+                android:padding="12dp"
+                android:radius="40dp"
+                android:layout_marginBottom="60dp"/>
 
-</RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
+

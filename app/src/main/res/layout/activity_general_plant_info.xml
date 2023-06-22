@@ -1,60 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GeneralPlantInfo">
+    android:orientation="vertical">
 
-    <ScrollView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/light_green">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GENERAL INFORMATION"
+            android:textSize="24dp"
+            android:layout_gravity="center_horizontal"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Papaya Plant Growth"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/papaya_logo"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Papaya plants are fast-growing and can reach a height of 10 to 30 feet. They have large, lobed leaves and a single stem topped with a crown of leaves. The plants produce both male and female flowers, and pollination is usually done by insects or wind. Once pollinated, the flowers develop into fruits that are ready to harvest in about six to nine months." />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Advantages of Papaya Plants"
-                android:textSize="20sp"
+                android:text="Card 1"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Papaya plants offer several advantages, including:\n\n- Rich in nutrients: Papaya fruits are packed with vitamins, minerals, and antioxidants that contribute to a healthy diet.\n\n- Digestive benefits: Papayas contain enzymes that aid in digestion and promote a healthy gut.\n\n- Immune system support: The high vitamin C content in papayas helps strengthen the immune system.\n\n- Skin health: Papaya extracts are used in skincare products for their exfoliating and rejuvenating properties." />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cultivating Papaya Plants"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Here are some tips for cultivating papaya plants:\n\n1. Choose a suitable location: Papayas thrive in warm climates with full sun exposure. Select a site with well-drained soil.\n\n2. Planting: Dig a hole large enough to accommodate the root ball of the papaya plant. Place the plant in the hole and backfill with soil.\n\n3. Watering: Papayas require regular watering, especially during dry periods. Avoid overwatering to prevent root rot.\n\n4. Fertilization: Use a balanced fertilizer to provide essential nutrients. Apply according to the manufacturer's instructions.\n\n5. Pruning: Remove any dead or damaged leaves and branches. Pruning can help promote air circulation and control the plant's size.\n\n6. Pest and disease control: Monitor for pests such as aphids or mealybugs. Treat any infestations promptly to prevent damage.\n\n7. Harvesting: Papayas are ready to harvest when the fruits turn yellow and give slightly to gentle pressure. Use a sharp knife to cut the fruit from the plant." />
+                android:gravity="center_horizontal"/>
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+    <!-- Add Card 2 and Card 3 with similar structure -->
+
+    <!-- Card 2 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/papaya_logo"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Card 2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card 3 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/papaya_logo"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Card 3"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
