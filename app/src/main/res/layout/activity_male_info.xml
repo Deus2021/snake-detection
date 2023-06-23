@@ -1,46 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MaleInfo"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Male Papaya Information"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp" />
-
-    <ScrollView
-        android:layout_below="@id/titleTextView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="Male Papaya Plant"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
 
-            <TextView
-                android:id="@+id/contentTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The male papaya plant (Carica papaya) is an important component of papaya cultivation. While it does not produce fruit, it plays a crucial role in the pollination process, ensuring the successful reproduction of the papaya tree."
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="16dp"/>
 
-        </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Characteristics"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:lineSpacingMultiplier="1.5"
+            android:text="1. Appearance: Male papaya plants typically have slender trunks with fewer leaves compared to female plants. They generally grow taller, reaching heights of up to 30 feet.\n\n2. Flowering: Male papaya plants produce large, showy flowers on long stalks. The flowers are typically white or cream-colored and have multiple stamens.\n\n3. Stamens: The stamens of the male flowers contain the pollen, which is essential for fertilizing the female flowers.\n\n4. Fruit Absence: Unlike the female papaya plants that bear fruit, the male plants do not produce any edible papaya fruits. Their primary purpose is to provide pollen for pollination.\n\n5. Lifespan: Male papaya plants have a relatively shorter lifespan compared to female plants. They usually live for around two to three years." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Role in Pollination"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The male papaya plant plays a crucial role in the pollination process. Its flowers produce an abundance of pollen, which is transferred to the female flowers by wind or insects such as bees. The transfer of pollen is necessary for the fertilization of the female flowers and the subsequent development of papaya fruits."
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cultivation Considerations"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="When establishing a papaya plantation, it is important to maintain an appropriate ratio of male to female papaya plants. The presence of sufficient male plants ensures adequate pollination and enhances the fruit set in the female plants."
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="While male papaya plants do not produce fruit themselves, their contribution to the papaya cultivation process is vital. They are an integral part of creating a healthy and productive papaya plantation."
+            android:lineSpacingMultiplier="1.5"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+

@@ -27,19 +27,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/layoutone"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/papaya_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/papaya_general"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Card 1"
+                android:text="Understant Papaya Plant"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"/>
@@ -60,19 +61,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/layouttwo"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/papaya_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/papaya_growth"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Card 2"
+                android:text="Different stages for Papaya Plant growth"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"/>
@@ -91,11 +93,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/layoutthree"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/papaya_logo"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>

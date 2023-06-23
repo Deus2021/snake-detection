@@ -175,13 +175,13 @@ public class SetImage extends AppCompatActivity {
 
         switch (id) {
             case R.id.help:
-//                Intent intent = new Intent(SetImage.this, UserManual.class);
-//                startActivity(intent);
-//                return true;
+                Intent intent = new Intent(SetImage.this, Help.class);
+                startActivity(intent);
+                return true;
 
             case R.id.manual:
-                Intent intent = new Intent(SetImage.this, UserManual.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(SetImage.this, UserManual.class);
+                startActivity(intent2);
                 return true;
 
             default:
