@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
-    >
-    <RelativeLayout
+    android:background="@drawable/page">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_image"
-        >
+        android:layout_above="@+id/buttonsLayout"> <!-- Align ScrollView above buttonsLayout -->
+
+        <!-- Rest of your content here, such as ViewPager and other views -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="25dp"
+        android:layout_alignParentBottom="true"> <!-- Align LinearLayout (buttonsLayout) to the bottom -->
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true"
-            android:padding="25dp">
+            android:text="Start"
+            android:textColor="@color/black"
+            android:layout_gravity="left"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            android:background="@drawable/button_normal"
+            android:drawablePadding="8dp"
+            android:layout_marginRight="30dp" />
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:text="Start"
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:background="@drawable/button_selector"
-                android:layout_marginBottom="16dp"
-                android:padding="12dp"
-                android:radius="24dp"
-                />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Get Info"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:layout_marginBottom="16dp"
+            android:padding="20dp"
+            android:background="@drawable/button_normal"
+            android:drawablePadding="8dp"
+            android:layout_marginLeft="30dp" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:text="Get Info"
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:background="@drawable/button_selector"
-                android:padding="12dp"
-                android:radius="40dp"
-                android:layout_marginBottom="60dp"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-</ScrollView>
-
+    </LinearLayout>
+</RelativeLayout>

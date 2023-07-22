@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +53,8 @@ public class SetImage extends AppCompatActivity {
     //private  static  final  int imageSize = 224;
     public static final String EXTRA_IMAGE_DATA = "image_data";
 
-    private Button selectBtn, captureBtn, predictBtn;
+    private Button predictBtn;
+    private ImageButton selectBtn, captureBtn;
     private TextView result;
     private ImageView imageView;
 
@@ -136,7 +138,7 @@ public class SetImage extends AppCompatActivity {
                                 maxPos = i;
                             }
                         }
-                        String[] classes = {"male", "female", "not-papaya"};
+                        String[] classes = {"Non Venomous", "Venomous", "Not Snake Bite"};
 
                         result.setText(classes[maxPos]);
                         result.setVisibility(View.GONE);
@@ -269,14 +271,14 @@ public class SetImage extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             Bundle extras = data.getExtras();
             bitmap = (Bitmap) extras.get("data");
-           // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
+            // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
             imageView.setImageBitmap(bitmap);
 
         } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-               // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
+                // bitmap = resizeBitmap(bitmap, MAX_IMAGE_SIZE);
                 imageView.setImageBitmap(bitmap);
                 getImageSize(selectedImage);
             } catch (IOException e) {

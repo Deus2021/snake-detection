@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Your App Name"
+        android:text="Snake Bite"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />

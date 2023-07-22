@@ -1,10 +1,13 @@
 package com.udom.myapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         buttonGetInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GetPlantInformation.class);
+                Intent intent = new Intent(MainActivity.this, GeneralPlantInfo.class);
                 startActivity(intent);
             }
         });
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         SliderPagerAdapter pagerAdapter = new SliderPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
+        // Show pop-up dialog
+        showPopUpDialog();
     }
 
     private void startSetImageActivity() {
@@ -53,6 +59,21 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private void showPopUpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Welcome to the App");
+        builder.setMessage("This is a pop-up dialog that appears when the activity is started.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing, just close the dialog
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private static class SliderPagerAdapter extends FragmentPagerAdapter {
@@ -126,7 +147,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 }
-
 

@@ -16,18 +16,20 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/light_green"
+            android:background="@color/green"
             android:elevation="4dp"
+            android:color="@color/white"
             android:clickable="true"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text=""
+            android:text="Select snake Bite  image"
             android:id="@+id/title"
             android:textSize="30dp"
             android:textAlignment="center"
             android:layout_marginTop="60dp"
+            android:textColor="@color/white2"
             />
 
         <ImageView
@@ -38,39 +40,43 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:scaleType="fitXY"
-            android:background="@drawable/photo_camera"
+            android:background="@drawable/nonvenomous"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/selectDetect"
+            android:layout_below="@+id/imageview"
+            android:layout_marginTop="120dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/galleryicon"
+                android:id="@+id/selectBtn"
+                android:layout_marginRight="80dp"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cameraicon"
+                android:id="@+id/captureBtn"
+                android:layout_marginLeft="80dp"
+                />
+
+        </LinearLayout>
 
         <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Select Image"
-            android:layout_below="@id/imageview"
-            android:background="@drawable/button_normal"
-            android:id="@+id/selectBtn"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Capture Image"
-            android:layout_below="@id/selectBtn"
-            android:background="@drawable/button_normal"
-            android:id="@+id/captureBtn"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="Detect Image"
-            android:layout_below="@id/captureBtn"
-            android:background="@drawable/button_normal"
+            android:layout_below="@id/selectDetect"
             android:id="@+id/detectBtn"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:background="@drawable/button_normal"
             android:layout_centerHorizontal="true"
             />
 

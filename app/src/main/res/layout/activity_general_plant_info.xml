@@ -33,7 +33,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/papaya_general"
+                android:src="@drawable/venmous"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>
 
@@ -67,7 +67,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/papaya_growth"
+                android:src="@drawable/nonvenomous"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>
 
@@ -99,7 +99,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/papaya_logo"
+                android:src="@drawable/splash"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_horizontal"/>
 

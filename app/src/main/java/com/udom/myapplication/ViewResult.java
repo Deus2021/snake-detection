@@ -18,11 +18,11 @@ import android.widget.Toast;
 
 public class ViewResult extends AppCompatActivity {
 
-    ImageView imageView, camera;
-    Button maleinfo, femaleinfo;
+    ImageView imageView;
+    Button moredetails, back;
 
-    LinearLayout layoutfemale, layoutmale, resultlayout, layoutnotpapaya;
-    TextView resultview;
+    LinearLayout  resultlayout, layoutpositive;
+    TextView resultview, obtained;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,18 +32,10 @@ public class ViewResult extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageview);
         resultview  = findViewById(R.id.viewresult);
-        maleinfo = findViewById(R.id.maleBtninfo);
-        femaleinfo = findViewById(R.id.femaleBtninfo);
         resultlayout = findViewById(R.id.layout1);
-        camera = findViewById(R.id.cameranotpapaya);
-
-        layoutfemale = findViewById(R.id.layoutfemale);
-        layoutmale  = findViewById(R.id.layoutmale);
-        layoutnotpapaya = findViewById(R.id.layoutnotpapaya);
-
-        maleinfo.setEnabled(false);
-        femaleinfo.setEnabled(false);
-
+        layoutpositive = findViewById(R.id.positive);
+        moredetails = findViewById(R.id.moredetails);
+        back = findViewById(R.id.back);
 
         imageView.setOutlineProvider(new ViewOutlineProvider() {
             @Override
@@ -66,35 +58,28 @@ public class ViewResult extends AppCompatActivity {
 
         resultlayout = findViewById(R.id.layout1);
 
-        if (result.equals("female")) {
-            resultview.setTextColor(getResources().getColor(R.color.light_green));
-            layoutfemale.setVisibility(View.VISIBLE);
-        } else if (result.equals("male")) {
-            resultview.setTextColor(getResources().getColor(R.color.light_green));
-            layoutmale.setVisibility(View.VISIBLE);
-        } else if (result.equals("not-papaya")) {
+        if (result.equals("Non Venomous")) {
+            resultview.setTextColor(getResources().getColor(R.color.green));
+            layoutpositive.setVisibility(View.VISIBLE);
+        } else if (result.equals("Venomous")) {
+            resultview.setTextColor(getResources().getColor(R.color.green));
+            layoutpositive.setVisibility(View.VISIBLE);
+        } else if (result.equals("Not Snake Bite")) {
             resultview.setTextColor(getResources().getColor(R.color.red));
-            layoutnotpapaya.setVisibility(View.VISIBLE);
+            layoutpositive.setVisibility(View.VISIBLE);
+            moredetails.setVisibility(View.INVISIBLE);
         }
 
-
-        maleinfo.setOnClickListener(new View.OnClickListener() {
+        moredetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewResult.this, MaleInfo.class);
+                Intent intent = new Intent(ViewResult.this, GeneralPlantInfo.class);
                 startActivity(intent);
             }
         });
 
-        femaleinfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewResult.this, FemaleInfo.class);
-                startActivity(intent);
-            }
-        });
 
-        camera.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewResult.this, SetImage.class);
