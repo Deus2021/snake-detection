@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -34,15 +32,13 @@ import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class SetImage extends AppCompatActivity {
+public class selectimage extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_SELECT = 2;
@@ -65,7 +61,7 @@ public class SetImage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_image);
+        setContentView(R.layout.activity_select_uplod_image);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_toolbar);
@@ -146,7 +142,7 @@ public class SetImage extends AppCompatActivity {
 
                         String resultText = result.getText().toString();
 
-                        Intent intent = new Intent(SetImage.this, ViewResult.class);
+                        Intent intent = new Intent(selectimage.this, ViewResult.class);
                         byte[] imageData = getByteArrayFromBitmap(bitmap);
                         intent.putExtra(EXTRA_IMAGE_DATA, imageData);
                         intent.putExtra("result", resultText);
@@ -177,12 +173,12 @@ public class SetImage extends AppCompatActivity {
 
         switch (id) {
             case R.id.help:
-                Intent intent = new Intent(SetImage.this, Help.class);
+                Intent intent = new Intent(selectimage.this, Help.class);
                 startActivity(intent);
                 return true;
 
             case R.id.manual:
-                Intent intent2 = new Intent(SetImage.this, UserManual.class);
+                Intent intent2 = new Intent(selectimage.this, AppUserManual.class);
                 startActivity(intent2);
                 return true;
 
@@ -196,7 +192,7 @@ public class SetImage extends AppCompatActivity {
             if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 openCamera();
             } else {
-                ActivityCompat.requestPermissions(SetImage.this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
+                ActivityCompat.requestPermissions(selectimage.this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
             }
         }
     }

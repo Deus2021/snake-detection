@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +20,8 @@ import android.widget.Toast;
 public class ViewResult extends AppCompatActivity {
 
     ImageView imageView;
-    Button moredetails, back;
+    Button firstAidBtn;
+    private ImageButton moredetails, back;
 
     LinearLayout  resultlayout, layoutpositive;
     TextView resultview, obtained;
@@ -46,7 +48,7 @@ public class ViewResult extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        byte[] imageData = intent.getByteArrayExtra(SetImage.EXTRA_IMAGE_DATA);
+        byte[] imageData = intent.getByteArrayExtra(selectimage.EXTRA_IMAGE_DATA);
         if (imageData != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
             imageView.setImageBitmap(bitmap);
@@ -73,7 +75,7 @@ public class ViewResult extends AppCompatActivity {
         moredetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewResult.this, GeneralPlantInfo.class);
+                Intent intent = new Intent(ViewResult.this, firstaidjava.class);
                 startActivity(intent);
             }
         });
@@ -82,7 +84,7 @@ public class ViewResult extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewResult.this, SetImage.class);
+                Intent intent = new Intent(ViewResult.this, selectimage.class);
                 startActivity(intent);
             }
         });

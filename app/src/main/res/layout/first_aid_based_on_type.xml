@@ -11,8 +11,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GENERAL INFORMATION"
+            android:text="First Aid based on Type"
             android:textSize="24dp"
+            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             />
     </androidx.appcompat.widget.Toolbar>
@@ -27,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/layoutone"
+            android:id="@+id/layoutvenom"
+            android:background="@drawable/button_normal"
             android:padding="16dp">
 
             <ImageView
@@ -40,10 +42,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Understant Papaya Plant"
-                android:textSize="18sp"
+                android:text="Venom type and species"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:gravity="center_horizontal"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -61,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/layouttwo"
+            android:background="@drawable/button_normal"
+            android:id="@+id/layoutnonvenom"
             android:padding="16dp">
 
             <ImageView
@@ -74,15 +79,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Different stages for Papaya Plant growth"
-                android:textSize="18sp"
+                android:text="Non Venomous"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Card 3 -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,7 +98,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/layoutthree"
+            android:id="@+id/layoutpreventantion"
+            android:background="@drawable/button_normal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/page"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preventation Of Snike Bite"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/layouttdesc"
+            android:background="@drawable/button_normal"
             android:padding="16dp">
 
             <ImageView
@@ -106,12 +145,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Card 3"
-                android:textSize="18sp"
+                android:text="Background Description"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>

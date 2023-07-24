@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         buttonGetInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GeneralPlantInfo.class);
+                Intent intent = new Intent(MainActivity.this, firstaidjava.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSetImageActivity() {
-        Intent intent = new Intent(MainActivity.this, SetImage.class);
+        Intent intent = new Intent(MainActivity.this, selectimage.class);
         startActivity(intent);
     }
 
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showPopUpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Welcome to the App");
-        builder.setMessage("This is a pop-up dialog that appears when the activity is started.");
+        builder.setTitle("Welcome to Snake Dectection App");
+        builder.setMessage("This is a app will help you to detect snake by using snake bite mark,based on the two type of snake");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

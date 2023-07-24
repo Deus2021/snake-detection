@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetImage">
+    tools:context=".selectimage">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/green"
-            android:elevation="4dp"
+            android:clickable="true"
             android:color="@color/white"
-            android:clickable="true"/>
+            android:contentDescription="@string/app_name"
+            android:elevation="4dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -52,19 +53,20 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/galleryicon"
                 android:id="@+id/selectBtn"
-                android:layout_marginRight="80dp"
-                />
-            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cameraicon"
+                android:layout_marginRight="80dp"
+                android:contentDescription="@string/uplodimage"
+                android:src="@drawable/galleryicon" />
+
+            <ImageButton
                 android:id="@+id/captureBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="80dp"
-                />
+                android:contentDescription="@string/takeimage"
+                android:src="@drawable/cameraicon" />
 
         </LinearLayout>
 

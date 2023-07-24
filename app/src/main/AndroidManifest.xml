@@ -23,10 +23,10 @@
             android:name=".Help"
             android:exported="false" />
         <activity
-            android:name=".UserManual"
+            android:name=".AppUserManual"
             android:exported="false" />
         <activity
-            android:name=".GeneralPlantInfo"
+            android:name=".firstaidjava"
             android:exported="false" />
 
         <meta-data
@@ -37,7 +37,7 @@
             android:name=".ViewResult"
             android:exported="false" />
         <activity
-            android:name=".SetImage"
+            android:name=".selectimage"
             android:exported="true" />
         <activity
             android:name=".SplashScreen"

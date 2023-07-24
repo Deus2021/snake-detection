@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".UserManual">
+    tools:context=".AppUserManual">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +16,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User Manual - Image Classifier App"
-            android:textSize="20sp"
+            android:text="User Manual-:Snake bite detection App"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:paddingBottom="16dp" />
 
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Image Classifier App allows you to capture or select an image and classify it using a pre-trained machine learning model. The app provides real-time predictions on the captured or selected image, giving you insights into the content of the image."
+            android:text="The Snake bite detection App allows you to capture or select an image and classify it using a pre-trained machine learning model. The app provides real-time predictions on the captured or selected image, giving you insights into the content of the image."
             android:textSize="14sp"
             android:paddingBottom="16dp" />
 
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2.1. Installation: Download and install the Image Classifier App from the Google Play Store or Apple App Store.\n\n2.2. Launching the App: Open the app from your device's home screen or app drawer."
+            android:text="2.1. Installation: Download and install the Snake bite detection App from the Google Play Store or Apple App Store.\n\n2.2. Launching the App: Open the app from your device's home screen or app drawer."
             android:textSize="14sp"
             android:paddingBottom="16dp" />
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Image Classifier App follows the following workflow:\n\n1. Capture or Select Image: On the main screen, you can either capture an image using your device's camera or select an image from your device's gallery.\n\n2. Image Classification: After capturing or selecting an image, the app will process the image using a machine learning model. It will provide real-time predictions based on the content of the image.\n\n3. View Result: The app will display the classification result on the screen, indicating the predicted category or label of the image.\n\n4. Additional Information: Depending on the predicted result, you can access additional information related to the classification result. The app provides specific information for certain categories or labels."
+            android:text="The Snake bite detection App follows the following workflow:\n\n1. Capture or Select Image: On the main screen, you can either capture an image using your device's camera or select an image from your device's gallery.\n\n2. Image Classification: After capturing or selecting an image, the app will process the image using a machine learning model. It will provide real-time predictions based on the content of the image.\n\n3. View Result: The app will display the classification result on the screen, indicating the predicted category or label of the image.\n\n4. Additional Information: Depending on the predicted result, you can access additional information related to the classification result. The app provides specific information for certain categories or labels."
             android:textSize="14sp"
             android:paddingBottom="16dp" />
 
